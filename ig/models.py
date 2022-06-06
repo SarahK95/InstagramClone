@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from email.mime import image
 # from user.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
@@ -72,6 +73,12 @@ class Likes(models.Model):
         
     def __str__(self):
         return str(self.likes)
+    
+    
+class Comment(models.Model):
+    comments = models.CharField(max_length=100, blank=True)
+    image  = models.ForeignKey(Image, on_delete=models.CASCADE, default=None)
+    user = models. ForeignKey(User, on_delete=models.CASCADE)
     
 
     
