@@ -7,7 +7,7 @@ from django.forms import ImageField
 
 # Create your models here.
 class Profile(models.Model):  
-    prof_pic = ImageField(upload_to ='photos/', blank=True) 
+    prof_pic = ImageField(upload_to='prof_photos/', blank=True) 
     bio = models.CharField(max_length=500)
     user = models.OneToOneField('auth.User',on_delete=models.CASCADE, default=None)    
     
@@ -32,7 +32,7 @@ class Profile(models.Model):
         
 class Image(models.Model):
     name = models.CharField(max_length=100)
-    image = ImageField(upload_to ='photos/')
+    image = ImageField(upload_to ='iamge_photos/', blank=True)
     caption = models.CharField(max_length=500)
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
