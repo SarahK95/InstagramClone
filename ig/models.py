@@ -22,3 +22,12 @@ class Image(models.Model):
         
     def update_caption(self):
         img = Image.objects.filter(id=Image.id).update()      
+        
+    class Meta:
+        ordering = ['name']    
+        
+
+@classmethod
+def images(cls):
+    images = cls.objects.filter(id = Image.id)
+    return images        
