@@ -75,6 +75,20 @@ def profilePage(request):
     }
     
     return render (request, 'profile.html', context)
+
+@login_required(login_url='/accounts/login')
+def updateProfile(request):
+    current_user = request.user
+    myprof = Profile.objects.get(user=current_user.id)
+    updateForm = UpdateProfileForm(instance=request.user)
+    if request.method == 'POST':
+        updateForm = UpdateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        if updateForm.is_valid():
+            updateForm.save()     
+        return redirect('instaProfile')
+    else:
+        updateForm = UpdateProfileForm(instance=request.user.profile)
+    return render(request,'update_profile.html', {'myprof':myprof})
            
     
 

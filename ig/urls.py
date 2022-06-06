@@ -9,5 +9,8 @@ urlpatterns = [
     path('home/',views.home,name='ighome'),
     path('update-profile/',views.updateProfile,name='editProf'),
     path('upload/',views.uploadPic,name='igFeed'),
+    path('profile/',views.profilePage,name='instaProfile'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
