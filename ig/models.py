@@ -1,11 +1,36 @@
 from distutils.command.upload import upload
-import profile
+# from user.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ImageField
+from django.dispatch import receiver
 
 
 # Create your models here.
+class Profile(models.Model):  
+    prof_pic = ImageField(upload_to ='photos/', blank=True) 
+    bio = models.CharField(max_length=500)
+    user = models.OneToOneField('auth.User',on_delete=models.CASCADE, default=None)    
+    
+    def save_profile(self):
+        self.save
+        
+    def delete_profile(self):
+        prof = Profile.objects.filter(id=Profile.id).delete()    
+        
+    def update_profile(self):
+        prof = Profile.objects.filter(id =Profile.id).update()
+        
+    @classmethod
+    def profile(cls):
+        profile = cls.objects.filter(id=Profile.id)
+        return profile
+    
+    def __str__(self):
+            return f'{self.user.username}'
+        
+        
+        
 class Image(models.Model):
     name = models.CharField(max_length=100)
     image = ImageField(upload_to ='photos/')
@@ -37,21 +62,18 @@ class Image(models.Model):
         return str(self.name)
     
     
-class Profile(models.Model):  
-    prof_pic = ImageField(upload_to ='photos/', blank=True) 
-    bio = models.CharField(max_length=500)
-    user = models.OneToOneField('auth.User',on_delete=models.CASCADE, default=None)    
+class Likes(models.Model):
+    likes = models.IntegerField(blank=True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    def save_profile(self):
-        self.save
+    # def save_likes(self):
+    #     self.save()
         
-    def delete_profile(self):
-        prof = Profile.objects.filter(id=Profile.id).delete()    
+    # def __str__(self):
+    #     return str(self.likes)
+    
+
+    
+
         
-    def update_profile(self):
-        prof = Profile.objects.filter(id =Profile.id).update()
-        
-    @classmethod
-    def profile(cls):
-        profile = cls.objects.filter(id=Profile.id)
-        return profile       
