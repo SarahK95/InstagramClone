@@ -1,10 +1,8 @@
-from distutils.command.upload import upload
-from email.mime import image
 # from user.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ImageField
-from django.dispatch import receiver
+
 
 
 # Create your models here.
@@ -92,5 +90,10 @@ class Comment(models.Model):
         return str(self.comments) 
 
     
+class Following(models.Model):
+    username = models.CharField(blank=True,max_length = 255)
+    followed = models.CharField(blank=True,max_length = 255)
 
+    def __str__(self):
+        return f'{self.username}'
         
