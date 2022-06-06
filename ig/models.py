@@ -10,7 +10,7 @@ class Image(models.Model):
     name = models.CharField(max_length=100)
     image = ImageField(upload_to ='photos/')
     caption = models.CharField(max_length=500)
-    profile = models.ForeignKey(User,on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
     likes = models.ManyToManyField(User,blank=True, default=None)
     comment = models.ManyToManyField(User,default=None, blank=True,related_name='comments')
@@ -44,3 +44,8 @@ class Profile(models.Model):
     
     def save_profile(self):
         self.save
+        
+    def delete_profile(self):
+        prof = Profile.objects.filter(id=Profile.id).delete()    
+        
+        
