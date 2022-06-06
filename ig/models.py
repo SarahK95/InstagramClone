@@ -80,6 +80,10 @@ class Comment(models.Model):
     image  = models.ForeignKey(Image, on_delete=models.CASCADE, default=None)
     user = models. ForeignKey(User, on_delete=models.CASCADE)
     
+    def save_comments(self):
+        self.save()
+        
+        
 
     
 
