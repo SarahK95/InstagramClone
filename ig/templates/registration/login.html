@@ -1,0 +1,50 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <img src="{% static 'img/gram1.png' %}"  alt=""  
+                             width="100%" height="60%" id="insta">
+        </div>
+        <div class="col-md-4">
+            <div class="card ">
+                <div class="card-title">
+                    <img src="{% static 'images/insta5.png' %}" alt="" width="40%" class="D-block mx-auto">
+                </div>
+                <div class="card-body " style="margin-top: 130px;">
+                    <form action="" method="post" novalidate>
+                        {% csrf_token%}
+                        {% bootstrap_form form%}
+                        <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
+                    </form>
+                </div>
+                <a href="/accounts/password/change">Forgot password? </a>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    Don't have an account? <a href="/accounts/register/">Sign up</a>
+                    <input type="hidden" name="next" value="{{next}}">
+                </div>
+            </div>
+            <div container>
+                <p class="text-center">Get the app</p>
+                <div class="row">
+                   
+                    <div class="col-md-5 ">
+                        <img src="{% static 'img/gram2.png' %}" alt="" width="100%" class="download">
+                    </div>
+                    <div class="col-md-5 ">
+                        <img src="{% static 'img/gram3.png' %}" alt="" width="100%" class="download">
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
