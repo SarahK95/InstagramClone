@@ -51,4 +51,7 @@ class Profile(models.Model):
     def update_profile(self):
         prof = Profile.objects.filter(id =Profile.id).update()
         
-           
+    @classmethod
+    def profile(cls):
+        profile = cls.objects.filter(id=Profile.id)
+        return profile       
