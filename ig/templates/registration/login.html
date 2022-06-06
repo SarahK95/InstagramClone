@@ -15,7 +15,7 @@
                     <img src="{% static 'img/gram4.png' %}" alt="" width="40%" class="D-block mx-auto">
                 </div>
                 <div class="card-body " style="margin-top: 130px;">
-                    <form action="" method="post" novalidate>
+                    <form action="/accounts/login/" method="post">
                         {% csrf_token%}
                         {% bootstrap_form form%}
                         <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
