@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+
+{% block content %}
+
+
+<div class='container'>
+    {% include 'navbar.html' %}
+<hr>
+
+<div class='row justify-content-center top-buffer'>
+    <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7 d-block top-buffer'> 
+    <div class='d-inline-flex'>
+    <div class="userAvatar mr-2"> <img class='img-thumbnail' src="{{request.user.profile.prof_pic.cdn_url}}" alt='image'></div>
+    <div class='text-center mr-2 align-self-center'> <strong> {{ request.user.profile.username}} </strong> </div>
+    </div>
+    <hr>
+    <div class='text-center align-self-center'> <p> Email:  {{ request.user.email }} </p></div>
+    <div class='text-center align-self-center'> <p> Bio:  {{ request.user.profile.bio}} </p>  
+    </div>
+    <div class='text-center align-self-center'> <p> <a href={% url 'editProf' %}> Edit Bio </a> </p>  
+    </div>  
+    <hr>
+    {% for photo in cphoto %}
+    <h5> My Posts... </h5>
+    <div class='d-flex justify-content-center'>
+    <img class='img-responsive imagePost' src="{{photo.image.cdn_url}}" alt='image'>
+    </div>
+    <p> {{photo.name}} </p>
+    <p> {{ photo.caption }} </p>
+    <p>
+    {{photo.like_set.all|length}}  <i class="fa fa-heart-o"></i>   {{photo.comment_set.all|length}} <i class="fa fa-commenting-o"></i> </p>
+    <hr>
+    {% endfor %}
+
+    </div>
+    {% if cphoto %}
+    {% else %}
+
+
+<div class='d-flex col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center'>
+<div class='userAvatar float-left'><img class='img-thumbnail' src="{{request.user.profile.prof_pic.cdn_url}}" alt='image'></div>
+<div class='align-self-center mx-auto'> <strong> {{ request.user.username}} </strong> </div>
+ <div class='text-center align-self-center'> <p> <a href={% url 'editProf' %}> Edit Bio </a> </p>  
+</div>  
+
+</div>
+
+<div  class='col-xs-7 col-sm-7 col-md-7 col-lg-7 d-flex justify-content-start'> You haven't posted any pics yet...  <a href={% url 'igFeed' %}> Click here to post one </a> </div>
+
+</div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
