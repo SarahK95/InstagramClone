@@ -15,16 +15,16 @@ def first(request):
     return render(request, 'registration/login.html', locals())
 
 # homepage 
-# @login_required(login_url='/accounts/login')
-# def home(request):
-#     likesForm = LikesForm
-#     commentForm = CommentsForm
-#     images = Image.objects.all()
-#     user = request.user.get_username()
-#     profile = Profile.objects.all()
-#     likes = Likes.objects.all()
+@login_required(login_url='/accounts/login')
+def home(request):
+    likesForm = LikesForm
+    commentForm = CommentsForm
+    images = Image.objects.all()
+    user = request.user.get_username()
+    profile = Profile.objects.all()
+    likes = Likes.objects.all()
     
-#     return render (request, 'home.html', locals())
+    return render (request, 'home.html', locals())
 
 
 
