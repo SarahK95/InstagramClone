@@ -55,7 +55,13 @@ class Image(models.Model):
     @classmethod
     def images(cls):
         images = cls.objects.filter(id = Image.id)
-        return images     
+        return images 
+        
+    @classmethod
+    def search_by_username(cls,username):
+        search_user= User.objects.get(username=username)
+        gotUser = cls.objects.filter(profile=search_user)
+        return gotUser
     
     def __str__(self):
         return str(self.name)

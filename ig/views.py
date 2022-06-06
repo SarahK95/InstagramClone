@@ -3,7 +3,7 @@ from django.contrib.auth import login, views, forms
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib.auth.models import User
-from .forms import LikesForm, CommentsForm, UpdateProfileForm, UploadPicForm
+from .forms import LikesForm, CommentsForm, UpdateProfileForm, UploadPictureForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 
@@ -89,6 +89,43 @@ def updateProfile(request):
     else:
         updateForm = UpdateProfileForm(instance=request.user.profile)
     return render(request,'update_profile.html', {'myprof':myprof})
+
+@login_required(login_url='/accounts/login')
+def search_results(request):
+    if 'username' in request.GET and request.GET["username"]:  
+        images = Image.objects.all()
+        user = request.user.get_username()
+        profile = Profile.objects.all()
+        search_term = request.GET.get("username")
+        searched_users = Image.search_by_username(search_term)
+        message = f"{search_term}"
+        photos = Image.objects.filter(profile=User.objects.get(username=search_term))
+        print(User.objects.get(username=search_term))
+        return render(request, 'search.html',{'images':images, 'user':user, 'profile':profile, 'searches_users':searched_users, 'message':message, 'photos':photos})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{'message':message})
+    
+    
+@login_required(login_url='/accounts/login')
+def uploadPicture(request):
+    current_user = request.user
+    uploadForm = UploadPictureForm()
+    print(uploadForm)
+    if request.method == 'POST':
+        uploadForm = UploadPictureForm(request.POST,request.FILES)
+        user = request.user.id
+        if uploadForm.is_valid():
+            upload = uploadForm.save(commit=False)
+            upload.user = request.user.profile
+            upload.profile = current_user
+            upload.save()    
+        return redirect('instaProfile', {'user': user})
+    else:
+            uploadForm = UploadPictureForm()
+    return render(request,'upload_picture.html', locals())    
+    
            
     
 
