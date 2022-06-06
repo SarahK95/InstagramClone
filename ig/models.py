@@ -67,11 +67,11 @@ class Likes(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE, default=None)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    # def save_likes(self):
-    #     self.save()
+    def save_likes(self):
+        self.save()
         
-    # def __str__(self):
-    #     return str(self.likes)
+    def __str__(self):
+        return str(self.likes)
     
 
     
