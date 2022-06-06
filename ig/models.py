@@ -48,4 +48,7 @@ class Profile(models.Model):
     def delete_profile(self):
         prof = Profile.objects.filter(id=Profile.id).delete()    
         
+    def update_profile(self):
+        prof = Profile.objects.filter(id =Profile.id).update()
         
+           
