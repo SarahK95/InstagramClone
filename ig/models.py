@@ -18,4 +18,7 @@ class Image(models.Model):
         self.save()
         
     def delete_image(self):
-        img = Image.objects.filter(id=Image.id).delete()    
+        img = Image.objects.filter(id=Image.id).delete()  
+        
+    def update_caption(self):
+        img = Image.objects.filter(id=Image.id).update()      
