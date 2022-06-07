@@ -1,13 +1,13 @@
 # from user.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import ImageField
+
 
 
 
 # Create your models here.
 class Profile(models.Model):  
-    prof_pic = ImageField(upload_to='prof_photos/', blank=True) 
+    prof_pic = models.ImageField(upload_to='profphotos/') 
     bio = models.CharField(max_length=500)
     user = models.OneToOneField('auth.User',on_delete=models.CASCADE, default=None)    
     
@@ -32,12 +32,12 @@ class Profile(models.Model):
         
 class Image(models.Model):
     name = models.CharField(max_length=100)
-    image = ImageField(upload_to ='iamge_photos/', blank=True)
+    image = models.ImageField(upload_to ='imagephotos/')
     caption = models.CharField(max_length=500)
-    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    profile = models.ForeignKey(User,on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
-    likes = models.ManyToManyField(User,blank=True, default=None)
-    comment = models.ManyToManyField(User,default=None, blank=True,related_name='comments')
+    # likes = models.ManyToManyField(User,blank=True, default=None)
+    # comment = models.ManyToManyField(User,default=None, blank=True,related_name='comments')
     
     def save_image(self):
         self.save()
