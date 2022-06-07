@@ -1,6 +1,10 @@
 from django import forms
 from .models import *
 
+class UploadPictureForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields=('image','name','caption',)
 
 class LikesForm(forms.Form):
     class Meta:
@@ -18,7 +22,3 @@ class UpdateProfileForm(forms.ModelForm):
         fields=['prof_pic','bio']
         
         
-class UploadPictureForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields=('image','name','caption',)
