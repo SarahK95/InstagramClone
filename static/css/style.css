@@ -1,5 +1,5 @@
 body {
-    font-family: 'Courgette', cursive;
+    font-family: cursive;
     font-size: 3vh;
 }
 .navHomeLink {
@@ -56,4 +56,14 @@ form {
 .searchResults h2 {
     font-family: 'Courgette', cursive;
     font-size: 3vh;
+}
+
+#grams{
+    justify-content: center;
+    align-items: center;
+}
+
+.card img{
+    justify-content: center;
+    align-items: center;
 }

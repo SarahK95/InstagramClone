@@ -7,9 +7,9 @@
   <meta charset="utf-8">
 
   {% if title %}
-  <title> Instagram_Clone {{title}}</title>
+  <title> Instagram-Clone {{title}}</title>
   {% else %}
-    <title> Instagram_Clone </title>
+    <title> Instagram-Clone </title>
   {% endif %}
 
 {% block styles %}
@@ -46,15 +46,15 @@
     
     {{request.user.username}} 
     
-    <i class="fa-solid fa-user" style="font-size:36px"></i></a>
+    <i class="fa fa-user-o" style="font-size:36px"></i></a>
     </li>
 
     <li>
-    <a class="nav-link" href="/upload"> <i class="fa-solid fa-arrow-up-from-line" style="font-size:36px"></i>  </a>
+    <a class="nav-link" href="/upload"> <i class="fa fa-cloud-upload" style="font-size:36px"></i>  </a>
     </li>
 
      <li>
-    <a class="nav-link" href="/logout"><i class="fa-solid fa-arrow-up-left-from-circle" style="font-size:36px"></i> </i></a>
+    <a class="nav-link" href="/logout"><i class="fa fa-sign-out" style="font-size:36px"></i> </i></a>
     </li>
     
     </ul>

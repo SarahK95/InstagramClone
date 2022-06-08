@@ -9,16 +9,18 @@ from django.contrib.auth.models import User
 class Profile(models.Model):  
     prof_pic = models.ImageField(upload_to='profphotos/') 
     bio = models.CharField(max_length=500)
-    user = models.OneToOneField('auth.User',on_delete=models.CASCADE, default=None)    
+    user = models.OneToOneField(User,on_delete=models.CASCADE, default=None)    
     
     def save_profile(self):
         self.save
         
     def delete_profile(self):
-        prof = Profile.objects.filter(id=Profile.id).delete()    
+        # prof = Profile.objects.filter(id=Profile.id).delete()   
+        self.delete() 
         
     def update_profile(self):
-        prof = Profile.objects.filter(id =Profile.id).update()
+        # prof = Profile.objects.filter(id =Profile.id).update()
+        self.update()
         
     @classmethod
     def profile(cls):
@@ -36,7 +38,7 @@ class Image(models.Model):
     caption = models.CharField(max_length=500)
     profile = models.ForeignKey(User,on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
-    # likes = models.ManyToManyField(User,blank=True, default=None)
+    # like = models.ManyToManyField(User,blank=True, default=None)
     # comment = models.ManyToManyField(User,default=None, blank=True,related_name='comments')
     
     def save_image(self):

@@ -12,7 +12,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 # first page user sees basically loginpage
 def first(request):
     form = forms.AuthenticationForm
-    return render(request, 'registration/login.html', {'form':form})
+    return render(request, 'landing.html', {'form':form})
 
 # homepage 
 @login_required(login_url='/accounts/login')
@@ -33,7 +33,7 @@ def home(request):
         'likes':likes
     }
     
-    return render (request, 'home.html', context)
+    return render (request, 'all_pages/home.html', context)
 
 def likes(request, image_id):
     likesForm = LikesForm()
@@ -60,7 +60,7 @@ def profilePage(request):
     images = Image.objects.all()
     user = request.user.get_username()
     current_user = request.user
-    cphoto = Image.objects.filter(profile=current_user.id)
+    photos = Image.objects.filter(profile=current_user.id)
     profile = Profile.objects.all()
     likes = Likes.objects.all()
     
@@ -71,10 +71,10 @@ def profilePage(request):
         'user':user,
         'profile':profile,
         'likes':likes,
-        'cphoto':cphoto
+        'photos':photos
     }
     
-    return render (request, 'profile.html', context)
+    return render (request, 'all_pages/profile.html', context)
 
 @login_required(login_url='/accounts/login')
 def updateProfile(request):
@@ -88,7 +88,7 @@ def updateProfile(request):
         return redirect('instaProfile')
     else:
         updateForm = UpdateProfileForm(instance=request.user.profile)
-    return render(request,'update_profile.html', {'myprof':myprof})
+    return render(request,'all_pages/update_profile.html', {'myprof':myprof})
 
 @login_required(login_url='/accounts/login')
 def search_results(request):
@@ -101,11 +101,11 @@ def search_results(request):
         message = f"{search_term}"
         photos = Image.objects.filter(profile=User.objects.get(username=search_term))
         print(User.objects.get(username=search_term))
-        return render(request, 'search.html',{'images':images, 'user':user, 'profile':profile, 'searches_users':searched_users, 'message':message, 'photos':photos})
+        return render(request, 'all_pages/search.html',{'images':images, 'user':user, 'profile':profile, 'searches_users':searched_users, 'message':message, 'photos':photos})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search.html',{'message':message})
+        return render(request, 'all_pages/search.html',{'message':message})
     
     
 @login_required(login_url='/accounts/login')
@@ -124,7 +124,7 @@ def uploadPicture(request):
         return redirect('instaProfile', {'user': user})
     else:
             uploadForm = UploadPictureForm()
-    return render(request,'upload_picture.html', locals())    
+    return render(request,'all_pages/upload_picture.html', locals())    
     
            
     
