@@ -6,7 +6,7 @@
 
 This is a Instagram clone application that is used to display images. The application is build with Django Framework in Pthyon.
 
-
+![landing page](https://github.com/SarahK95/InstagramClone/blob/master/Screenshot%20(513).png)
 
 ### User story
 - User can sign in
