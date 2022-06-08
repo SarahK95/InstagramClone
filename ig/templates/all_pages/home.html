@@ -54,6 +54,7 @@
 
 <p> {{item.name}} </p>
 <p> {{ item.caption }} </p>
+
 <p>{{item.like_set.all|length }} <i class="fa fa-heart-o"></i> 
 {{ item.comment_set.all|length }} <i class="fa fa-commenting-o"></i></p>
 
@@ -95,6 +96,16 @@
     </div>
    </form>
 </div>
+
+{{ item.like_set.all|length }}.
+
+<ul style="list-style-type: none">
+{% for likess in item.like_set.all %}
+<li> {{likess.like}} </li>
+{% endfor %}
+</ul>
+
+
 
 <hr>
 </div>

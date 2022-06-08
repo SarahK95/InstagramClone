@@ -38,7 +38,8 @@
 
 
 <div class='d-flex col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center'>
-<div class='userAvatar float-left'><img class='img-thumbnail' src="{{request.user.profile.prof_pic._url}}" alt='image'></div>
+<div class='userAvatar float-left'><img class='img-thumbnail' src="{{request.user.profile.prof_pic.url}}" alt='image'></div>
+
 <div class='align-self-center mx-auto'> <strong> {{ request.user.username}} </strong> </div>
  <div class='text-center align-self-center'> <p> <a href={% url 'editProf' %}> Edit Bio </a> </p>  
 </div>  

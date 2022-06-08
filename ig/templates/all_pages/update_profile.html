@@ -17,7 +17,9 @@
 
     {% csrf_token %}
 
-    {% bootstrap_form updateForm layout='inline' %}
+    {% for field in form %}
+    {% bootstrap_field field %}
+{% endfor %}
 
     <div class="form-group">
 
