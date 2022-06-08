@@ -10,6 +10,8 @@ This is a Instagram clone application that is used to display images. The applic
 
 ### User story
 - User can sign in
+- User can login
+- User can view profile
 - User can veiw pics posted by other users
 - User can comment on images posted
 
