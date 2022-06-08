@@ -4,8 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib.auth.models import User
 from .forms import LikesForm, CommentsForm, UpdateProfileForm, UploadPictureForm
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse,Http404,HttpResponseRedirect
 
 # Create your views here.
 
@@ -115,17 +113,24 @@ def uploadPicture(request):
     print(uploadForm)
     if request.method == 'POST':
         uploadForm = UploadPictureForm(request.POST,request.FILES)
+        
         user = request.user.id
+
         if uploadForm.is_valid():
             upload = uploadForm.save(commit=False)
             upload.user = request.user.profile
             upload.profile = current_user
-            upload.save()    
-        return redirect('instaProfile', {'user': user})
+            upload.save()
+            
+        
+            
+        return redirect('instaProfile')
     else:
+       
             uploadForm = UploadPictureForm()
-    return render(request,'all_pages/upload_picture.html', locals())    
-    
+
+    return render(request,'all_pages/upload_picture.html', locals())
+
            
     
 

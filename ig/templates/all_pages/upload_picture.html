@@ -6,9 +6,11 @@
 <hr>
 <div class='jumbotron'>
 <div>
-    <form  action="{% url 'igFeed' %}" method="post">
+    <form  action="{% url 'igFeed' %}" method="POST">
     {% csrf_token %}
+    
     {% bootstrap_form uploadForm layout='inline' %}
+    
     <div class="form-group">
     <input type="submit" class="btn btn-primary btn-sm my-2" value="Upload">
     </div>
